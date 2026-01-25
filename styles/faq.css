@@ -1,0 +1,122 @@
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --accent:#2b6cb0;
+  --muted:#6b7280;
+  --q:#0f172a;
+  --a:#334155;
+}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Helvetica,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef2ff 60%);
+  color:var(--q);
+  -webkit-font-smoothing:antialiased;
+}
+.container{
+  max-width:820px;
+  margin:48px auto;
+  padding:24px;
+}
+.header{
+  background:var(--card);
+  border-left:6px solid var(--accent);
+  padding:18px 20px;
+  box-shadow:0 6px 18px rgba(15,23,42,0.06);
+  border-radius:8px;
+}
+.header h1{
+  margin:0;
+  font-size:1.6rem;
+  letter-spacing:-0.02em;
+  color:var(--accent);
+}
+.header p{ margin:6px 0 0; color:var(--muted); font-size:0.95rem; }
+
+.faq{
+  margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.item{
+  background:var(--card);
+  border-radius:10px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(15,23,42,0.04);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.item:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(15,23,42,0.06); }
+
+/* summary (question) styling - replace previous .question rules with summary use */
+summary.question {
+  list-style: none;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:600;
+  color:var(--q);
+  font-size:1.02rem;
+  background:transparent;
+  border:none;
+  padding:0;
+}
+
+/* arrow icon before the question */
+summary.question::before{
+  content: "\25B6"; /* ▶ right-pointing */
+  display:inline-block;
+  color:var(--accent);
+  font-size:0.95rem;
+  line-height:1;
+  margin-right:8px;
+  transition: transform .18s ease, color .18s ease, content .18s ease;
+  transform-origin:50% 50%;
+}
+
+/* hide native marker */
+summary::-webkit-details-marker { display:none; }
+summary::marker { display:none; }
+
+/* focus outline for keyboard users */
+summary:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* answer collapse/expand animation */
+.answer{
+  margin-top:10px;
+  color:var(--a);
+  line-height:1.45;
+  font-size:0.95rem;
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .32s ease, opacity .2s ease, padding-top .2s ease;
+  padding-top: 0;
+}
+
+/* when details is open show answer */
+.item[open] .answer{
+  max-height: 640px; /* large enough to fit content */
+  opacity: 1;
+  padding-top: 10px;
+}
+
+/* when open, show down-pointing arrow */
+.item[open] > summary.question::before{
+  content: "\25BC"; /* ▼ down-pointing */
+  transform: none;
+}
+
+/* keep hover transform for details */
+.item:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(15,23,42,0.06); }
+
+/* small responsive tweaks */
+@media (max-width:560px){
+  .container{padding:16px; margin:18px;}
+  .header h1{font-size:1.25rem;}
+}
